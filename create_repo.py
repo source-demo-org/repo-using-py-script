@@ -1,19 +1,23 @@
 import requests
 from config import GITHUB_USERNAME, GITHUB_TOKEN
  
-def create_github_repo(repo_name, description="", private=True, auto_init=True):
-    url = "https://api.github.com/user/repos"
+def create_github_repo(repo_name, description="", private=True, auto_init=True, org_name=None):
+    if org_name:
+        url = f"https://api.github.com/orgs/{org_name}/repos"
+    else:
+        url = "https://api.github.com/user/repos"
+
     headers = {
         "Accept": "application/vnd.github+json"
     }
-    payload = {
+    data = {
         "name": repo_name,
         "description": description,
         "private": private,
         "auto_init": auto_init
     }
  
-    response = requests.post(url, json=payload, auth=(GITHUB_USERNAME, GITHUB_TOKEN))
+    response = requests.post(url, json=data, auth=(GITHUB_USERNAME, GITHUB_TOKEN))
  
     if response.status_code == 201:
         print(f"Repository '{repo_name}' created successfully!")
@@ -24,7 +28,7 @@ def create_github_repo(repo_name, description="", private=True, auto_init=True):
         return None
  
 if __name__ == "__main__":
-    repo_name = "public-repo-created-via-script"
+    repo_name = "public-repo-created-via-script-in-org"
     description = "This repo was created using a Python script and GitHub API."
-    create_github_repo(repo_name, description, private=False)
+    create_github_repo(repo_name, description, private=False,org_name="source-demo-org")
  
