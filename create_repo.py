@@ -16,10 +16,10 @@ def create_github_repo(repo_name, description="", private=True, auto_init=True):
     response = requests.post(url, json=payload, auth=(GITHUB_USERNAME, GITHUB_TOKEN))
  
     if response.status_code == 201:
-        print(f"Repository '{repo_name}' created successfully.")
+        print(f"Repository '{repo_name}' created successfully!")
         return response.json()
     else:
-        print(f"Failed to create repository: {response.status_code}")
+        print(f"Failed to create repository: {response.status_code} !!!")
         print("Error:", response.json())
         return None
  
