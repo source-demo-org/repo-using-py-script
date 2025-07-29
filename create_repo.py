@@ -24,7 +24,7 @@ def create_github_repo(repo_name, description="", private=True, auto_init=True):
         return None
  
 if __name__ == "__main__":
-    repo_name = "repo-created-via-script"
+    repo_name = "public-repo-created-via-script"
     description = "This repo was created using a Python script and GitHub API."
-    create_github_repo(repo_name, description, private=True)
+    create_github_repo(repo_name, description, private=False)
  
